@@ -16,7 +16,7 @@ Return
 ^j::
 Return
 
-;Blocks shorcut for exiting Chrome
+;Blocks shortcut for exiting Chrome
 ^+q::
 Return
 
