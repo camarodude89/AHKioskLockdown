@@ -1,4 +1,4 @@
-;This script locks down the keys that can be used for a Chrome kiosk
+;This script disables the keys that can be used for a Chrome kiosk
 
 ;Blocks shortcut for opening new Chrome window
 ^n::
@@ -10,6 +10,10 @@ Return
 
 ;Blocks shortcut for opening a new tab
 ^t::
+Return
+
+;Blocks shortcut for closing a tab
+^w::
 Return
 
 ;Blocks shortcut for opening download page
@@ -27,7 +31,6 @@ Return
 ;Blocks opening the last closed tab
 ^+t::
 Return
-
 
 ;Blocks bookmarking a webpage
 ^d::
@@ -67,4 +70,30 @@ Return
 !F4::
 Return
 
-#p::Suspend
+#p::Suspend, Off
+
+;Intercepts the window flag + L combo
+^l::
+{
+msgbox, Enter Konami Code!!!
+~Up::
+~Down::
+~Left::
+~Right::
+~a::
+~b::
+~Enter::
+CheckSequence( SubStr(A_ThisHotkey,2,1) )
+Return
+;-----------------------------------
+CheckSequence(Char) {
+static Sequence := "" , Wanted := "UUDDLRLRBAE"
+Sequence := SubStr(  Sequence Char  ,  (StrLen(Wanted)-1)*(-1)  )
+If ( Sequence = Wanted ) ; single '=' should be case insensitive
+GoSub, myActionLabel ; you don't have to edit this function everytime
+}
+;-----------------------------------
+myActionLabel:
+Suspend, On
+Return
+}
