@@ -1,79 +1,63 @@
 ;This script disables the keys that can be used for a Chrome kiosk
 
 ;Blocks shortcut for opening new Chrome window
-^n::
-Return
+^n::Return
 
 ;Blocks shortcut for opening new incognito Chrome window
-^+n::
-Return
+^+n::Return
 
 ;Blocks shortcut for opening a new tab
-^t::
-Return
+^t::Return
 
 ;Blocks shortcut for closing a tab
-^w::
-Return
+^w::Return
 
 ;Blocks shortcut for opening download page
-^j::
-Return
+^j::Return
 
 ;Blocks shortcut for exiting Chrome
-^+q::
-Return
+^+q::Return
 
 ;Blocks opening browser history
-^h::
-Return
+^h::Return
 
 ;Blocks opening the last closed tab
-^+t::
-Return
+^+t::Return
 
 ;Blocks bookmarking a webpage
-^d::
-Return
+^d::Return
 
 ;Blocks bookmarking open pages...
-^+d::
-Return
+^+d::Return
 
 ;Blocks toggling the bookmarks bar
-^+b::
-Return
+^+b::Return
 
 ;Blocks opening the Bookmark manager
-^+o::
-Return
+^+o::Return
 
 ;Blocks saving a webpage
-^s::
-Return
+^s::Return
 
 ;Blocks clearing browsing data
-^+Del::
-Return
+^+Del::Return
 
 ;Blocks opening the Chrome task manager
 ;Couldn't get the task manager to open without being blocked but will
 ;leave this in for good measure
-+Esc::
-Return
++Esc::Return
 
 ;Blocks opening the developer tools
-^+i::
-Return
+^+i::Return
 
 ;Blocks close the window
-!F4::
-Return
+!F4::Return
 
+;Reinitiates hotkey suspension
 #p::Suspend, Off
 
-;Intercepts the window flag + L combo
-^l::
+;Allows entry of Konami code to suspend blocking of hotkeys
+#Space::
 {
 msgbox, Enter Konami Code!!!
 ~Up::
