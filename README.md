@@ -49,7 +49,7 @@ Shift + Left Click | Open a link in a new window
 Alt + Left Click | Download the target of a link
 Ctrl + W & Ctrl + F4 | Close the current tab
 Ctrl + J | Open the download page
-Ctrl + Shift + q & Ctrl + Shift + w | Exit Chrome
+Ctrl + Shift + Q & Ctrl + Shift + W | Exit Chrome
 Ctrl + H | Open browser history
 Ctrl + Shift + T | Open the last closed tab
 Ctrl + D | Bookmark the current webpage
