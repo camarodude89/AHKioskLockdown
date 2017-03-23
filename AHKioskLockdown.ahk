@@ -1,3 +1,4 @@
+#NoTrayIcon
 ;This script disables the keys that can be used for a Chrome kiosk
 
 ;Blocks shortcut for opening new Chrome window
