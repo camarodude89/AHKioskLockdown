@@ -108,11 +108,11 @@ F1::Return
 
 ;log out the user
 ;curly braces cannot be used here as it interferes with Suspend permit
+;if they surround the entirety of the hotkey code block
 ^l::
 Suspend, permit
 If (A_IsSuspended) {
-MsgBox, The permit argument worked.
-;run, shutdown /l /f
+run, shutdown /l /f
 }
 Return
 
