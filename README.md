@@ -21,7 +21,7 @@ The script only need be executed and it will do the rest.
 ### Disable blocking
 
 If you need to disable the keyboard shortcut blocking, use the keyboard
-shortcut Win+Space. This will display as message box stating, "Enter Konami
+shortcut Win + Space. This will display as message box stating, "Enter Konami
 Code!!!" At this point enter the key combination: Up, Up, Down, Down, Left,
 Right, Left, Right, B, A, Enter (aka Konami code.) This will suspend all
 hotkeys, thereby disabling the blocking of keyboard shortcuts.
@@ -29,7 +29,7 @@ hotkeys, thereby disabling the blocking of keyboard shortcuts.
 ### Logging the user off
 
 Once the Konami code has been entered, the keyboard shortcut for logging the
-user off becomes available. To log off, simply use the shortcut Ctrl+L. This
+user off becomes available. To log off, simply use the shortcut Ctrl + L. This
 runs the command line statement: shutdown /l /f.
 
 ## Blocked Keyboard shortcuts
@@ -57,7 +57,7 @@ Ctrl + Shift + D | Save all open tabs as bookmarks in a new folder
 F11 | Toggle full-screen mode
 Ctrl + Shift + B | Toggle visibility of the bookmarks bar
 Shift + Alt + T | Set focus on the first item in the Chrome toolbar
-F6 & Shift + F6 | Switch focus forward and bakc amongst the Address bar, Bookmarks bar and webpage
+F6 & Shift + F6 | Switch focus forward and back amongst the Address bar, Bookmarks bar and webpage
 Ctrl + Shift + O | Open the Bookmark Manager
 Ctrl + S | Save current webpage
 Ctrl + Shift + Del | Clear browsing data
