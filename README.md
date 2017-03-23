@@ -32,7 +32,7 @@ Once the Konami code has been entered, the keyboard shortcut for logging the
 user off becomes available. To log off, simply use the shortcut Ctrl + L. This
 runs the command line statement: shutdown /l /f.
 
-## Blocked Keyboard shortcuts
+## Blocked Keyboard Shortcuts
 
 This Chrome shortcut page was used as reference: [Chrome keyboard shortcuts](https://support.google.com/chrome/answer/157179?hl=en)
 
