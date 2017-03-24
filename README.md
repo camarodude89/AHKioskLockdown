@@ -24,7 +24,8 @@ If you need to disable the keyboard shortcut blocking, use the keyboard
 shortcut Win + Space. This will display as message box stating, "Enter Konami
 Code!!!" At this point enter the key combination: Up, Up, Down, Down, Left,
 Right, Left, Right, B, A, Enter (aka Konami code.) This will suspend all
-hotkeys, thereby disabling the blocking of keyboard shortcuts.
+hotkeys, thereby disabling the blocking of keyboard shortcuts. Blocking of
+shortcuts can be restored by using the shortcut Win + P.
 
 ### Logging the user off
 
