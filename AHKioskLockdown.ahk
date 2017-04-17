@@ -8,9 +8,6 @@ WinHide, ahk_class Shell_TrayWnd
 ;Disables dragging the Chrome window by the Title Bar
 WinSet, Style, -0x40000, Chrome
 
-;Disable minimizing button on Chrome
-WinSet, Style, -0x20000, Chrome
-
 ;The below disables the keys that can be used for a Chrome kiosk
 
 /*Disables double clicking in Chrome
@@ -143,7 +140,6 @@ F1::Return
 Suspend, Off
 WinHide, ahk_class Shell_TrayWnd
 WinSet, Style, -0x40000, Chrome
-WinSet, Style, -0x20000, Chrome
 Return
 
 /*log out the user
@@ -182,6 +178,5 @@ myActionLabel:
 Suspend, On
 WinShow, ahk_class Shell_TrayWnd
 WinSet, Style, +0x40000, Chrome
-WinSet, Style, +0x20000, Chrome
 Return
 }
