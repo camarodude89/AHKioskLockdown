@@ -1,9 +1,34 @@
 #Persistent
 
+SetTitleMatchMode, 2
+
 ;Hides the taskbar completely
 WinHide, ahk_class Shell_TrayWnd
 
+;Disables dragging the Chrome window by the Title Bar
+WinSet, Style, -0x40000, Chrome
+
+;Disable minimizing button on Chrome
+WinSet, Style, -0x20000, Chrome
+
 ;The below disables the keys that can be used for a Chrome kiosk
+
+/*Disables double clicking in Chrome
+specifically for the purpose of disabling minimizing the Chrome window by
+double clicking the title bar*/
+#IfWinActive, Chrome
+
+$*LButton::
+ocmx := cmx
+ocmy := cmy
+MouseGetPos, cmx, cmy
+If (ocmy != cmy) || (ocmx != cmx) || (A_TimeSincePriorHotkey > 500) || (A_TimeSincePriorHotkey > DllCall("GetDoubleClickTime"))
+Click Down
+return
+
+$*LButton Up::Click Up
+
+#IfWinActive
 
 ;Disables opening the start menu
 ~LWin Up::
@@ -63,8 +88,8 @@ F11::Return
 ;Blocks setting focus on the first item in the Chrome toolbar
 +!t::Return
 
-;Blocks switching focus forward and back amongst the Address bar,
-;Bookmarks bar and page
+/*Blocks switching focus forward and back amongst the Address bar,
+Bookmarks bar and page*/
 F6::
 +F6::Return
 
@@ -77,9 +102,9 @@ F6::
 ;Blocks clearing browsing data
 ^+Del::Return
 
-;Blocks opening the Chrome task manager
-;Couldn't get the task manager to open without being blocked but will
-;leave this in for good measure
+/*Blocks opening the Chrome task manager
+Couldn't get the task manager to open without being blocked but will
+leave this in for good measure*/
 +Esc::Return
 
 ;Blocks opening the developer tools
@@ -117,10 +142,13 @@ F1::Return
 #p::
 Suspend, Off
 WinHide, ahk_class Shell_TrayWnd
+WinSet, Style, -0x40000, Chrome
+WinSet, Style, -0x20000, Chrome
+Return
 
-;log out the user
-;curly braces cannot be used here as it interferes with Suspend permit
-;if they surround the entirety of the hotkey code block
+/*log out the user
+curly braces cannot be used here as it interferes with Suspend permit
+if they surround the entirety of the hotkey code block*/
 ^l::
 Suspend, permit
 If (A_IsSuspended) {
@@ -153,5 +181,7 @@ GoSub, myActionLabel ; you don't have to edit this function everytime
 myActionLabel:
 Suspend, On
 WinShow, ahk_class Shell_TrayWnd
+WinSet, Style, +0x40000, Chrome
+WinSet, Style, +0x20000, Chrome
 Return
 }
