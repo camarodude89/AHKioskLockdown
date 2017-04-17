@@ -1,5 +1,14 @@
-#NoTrayIcon
-;This script disables the keys that can be used for a Chrome kiosk
+#Persistent
+
+;Hides the taskbar completely
+WinHide, ahk_class Shell_TrayWnd
+
+;The below disables the keys that can be used for a Chrome kiosk
+
+;Disables opening the start menu
+~LWin Up::
+~RWin Up::
+^Esc::Return
 
 ;Blocks shortcut for opening new Chrome window
 ^n::Return
@@ -105,7 +114,9 @@ F1::Return
 ^u::Return
 
 ;Reinitiates hotkey suspension
-#p::Suspend, Off
+#p::
+Suspend, Off
+WinHide, ahk_class Shell_TrayWnd
 
 ;log out the user
 ;curly braces cannot be used here as it interferes with Suspend permit
@@ -141,5 +152,6 @@ GoSub, myActionLabel ; you don't have to edit this function everytime
 ;-----------------------------------
 myActionLabel:
 Suspend, On
+WinShow, ahk_class Shell_TrayWnd
 Return
 }
