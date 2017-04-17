@@ -10,9 +10,9 @@ WinSet, Style, -0x40000, Chrome
 
 ;The below disables the keys that can be used for a Chrome kiosk
 
-/*Disables double clicking in Chrome
-specifically for the purpose of disabling minimizing the Chrome window by
-double clicking the title bar*/
+;Disables double clicking in Chrome
+;specifically for the purpose of disabling minimizing the Chrome window by
+;double clicking the title bar
 #IfWinActive, Chrome
 
 $*LButton::
@@ -85,8 +85,8 @@ F11::Return
 ;Blocks setting focus on the first item in the Chrome toolbar
 +!t::Return
 
-/*Blocks switching focus forward and back amongst the Address bar,
-Bookmarks bar and page*/
+;Blocks switching focus forward and back amongst the Address bar,
+;Bookmarks bar and page
 F6::
 +F6::Return
 
@@ -99,9 +99,9 @@ F6::
 ;Blocks clearing browsing data
 ^+Del::Return
 
-/*Blocks opening the Chrome task manager
-Couldn't get the task manager to open without being blocked but will
-leave this in for good measure*/
+;Blocks opening the Chrome task manager
+;Couldn't get the task manager to open without being blocked but will
+;leave this in for good measure
 +Esc::Return
 
 ;Blocks opening the developer tools
@@ -142,9 +142,9 @@ WinHide, ahk_class Shell_TrayWnd
 WinSet, Style, -0x40000, Chrome
 Return
 
-/*log out the user
-curly braces cannot be used here as it interferes with Suspend permit
-if they surround the entirety of the hotkey code block*/
+;log out the user
+;curly braces cannot be used here as it interferes with Suspend permit
+;if they surround the entirety of the hotkey code block
 ^l::
 Suspend, permit
 If (A_IsSuspended) {
