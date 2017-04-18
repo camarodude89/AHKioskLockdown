@@ -1,9 +1,50 @@
 #Persistent
+#SingleInstance, Force
 
 SetTitleMatchMode, 2
 
+CreatePrinterButton() {
+    SetTitleMatchMode, 2
+    WinGetPos, x, y, w, h, Google Chrome
+    WinGet, isMax, MinMax, Google Chrome
+    
+    ;calculate the location of the top left corner of print button
+    xCoordOfButton := (x + w) - 34
+    yCoordOfButton := y + 45
+
+    if (isMax = 1) {
+        xCoordOfButton -= 10
+        yCoordOfButton += 2
+    }
+
+    Gui, Color, FFFFFF ;Random RGB color, doesn't matter what it is
+    Gui, Margin, 0, 0
+    Gui, Add, Picture, gPrint x0 y0, gnome_dev_printer.png
+    Gui, +LastFound +AlwaysOnTop -Border -SysMenu -Caption +ToolWindow
+    WinSet, TransColor, FFFFFF
+    Gui, Show, x%xCoordOfButton% y%yCoordOfButton%
+
+    Return
+}
+
+Print() {
+    Print:
+    ; Gets the control ID of google chrome
+    ControlGet, controlID, Hwnd,,Chrome_RenderWidgetHostHWND1, Google Chrome
+    ; Focuses on chrome without breaking focus on what you're doing
+    ControlFocus,,ahk_id %controlID%
+    ControlSend, ahk_parent, ^p, Google Chrome
+    controlID := 0
+    Return
+}
+
 ;Hides the taskbar completely
 WinHide, ahk_class Shell_TrayWnd
+
+;Creates initial printer button
+WinWaitActive, Google Chrome
+Sleep 500
+CreatePrinterButton()
 
 ;Disables dragging the Chrome window by the Title Bar
 WinSet, Style, -0x40000, Chrome
