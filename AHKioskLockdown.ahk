@@ -14,14 +14,16 @@ WinSet, Style, -0x40000, Chrome
 ;specifically for the purpose of disabling minimizing the Chrome window by
 ;double clicking the title bar
 #IfWinActive, Chrome
-
+CoordMode, Mouse, Relative
 $*LButton::
 ocmx := cmx
 ocmy := cmy
 MouseGetPos, cmx, cmy
+If (cmx >= 1640) && (cmx <= 1926) && (cmy >= 8) && (cmy <= 96)
+Return
 If (ocmy != cmy) || (ocmx != cmx) || (A_TimeSincePriorHotkey > 500) || (A_TimeSincePriorHotkey > DllCall("GetDoubleClickTime"))
 Click Down
-return
+Return
 
 $*LButton Up::Click Up
 
