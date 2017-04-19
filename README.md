@@ -18,6 +18,9 @@ minimizing or closing the window and accessing extensions, favorites, and settin
 Dragging the window by the title bar to resize the window has been disabled
 along with double clicking the title bar to minimize the window.
 
+Right clicking has been disabled to prevent tampering with the Chrome window and
+prevent access to other context menus.
+
 A print button will also overlay the settings menu button to prevent access
 and to provide an easily accessible method of printing.
 

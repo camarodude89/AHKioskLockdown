@@ -107,6 +107,10 @@ WinSet, Style, -0x40000, Chrome
 
 ;The below disables the keys that can be used for a Chrome kiosk
 
+;Disables right clicking
+
+$*RButton::Return
+
 ;Disables double clicking in Chrome
 ;specifically for the purpose of disabling minimizing the Chrome window by
 ;double clicking the title bar
