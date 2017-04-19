@@ -4,7 +4,6 @@
 SetTitleMatchMode, 2
 
 CreatePrinterButton() {
-    SetTitleMatchMode, 2
     WinGetPos, x, y, w, h, Google Chrome
     WinGet, isMax, MinMax, Google Chrome
     
@@ -38,12 +37,44 @@ Print() {
     Return
 }
 
+CreateWindow() {
+    WinGetPos, x, y, w, h, Google Chrome
+    WinGet, isMax, MinMax, Google Chrome
+
+    xCoordOfWin := (x + w) - 320
+    yCoordOfWin := y
+
+    width := 320
+    height := 100
+
+    if (isMax = 1) {
+        x += 8
+        y += 8
+        height += 2
+    }
+    else {
+        height += 4
+    }
+
+    Gui, Color, 46bfec
+    Gui, Margin, %width%, %height%
+    Gui, +LastFound +E0x80000 +AlwaysOnTop -Border -SysMenu +Owner -Caption
+    Gui, Show, x%xCoordOfWin% y%yCoordOfWin%, overlay
+    WinSet, Transparent, 150, overlay
+    Return
+}
+
+CalcOffLimitsZone() {
+
+}
+
 ;Hides the taskbar completely
 WinHide, ahk_class Shell_TrayWnd
 
 ;Creates initial printer button
 WinWaitActive, Google Chrome
 Sleep 500
+CreateWindow()
 CreatePrinterButton()
 
 ;Disables dragging the Chrome window by the Title Bar
