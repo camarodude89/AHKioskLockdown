@@ -18,7 +18,7 @@ CreatePrinterButton() {
 
     Gui, Color, FFFFFF ;Random RGB color, doesn't matter what it is
     Gui, Margin, 0, 0
-    Gui, Add, Picture, gPrint x0 y0, printerIcon.png
+    Gui, Add, Picture, gPrint x0 y0, \\mem-app\kiosk\printerIcon.png
     Gui, +LastFound +AlwaysOnTop -Border -SysMenu -Caption +ToolWindow
     WinSet, TransColor, FFFFFF
     Gui, Show, x%topLeftX% y%topLeftY%, Printer Button
