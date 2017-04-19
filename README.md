@@ -13,19 +13,27 @@ some of the keyboard shortcuts are system based rather than Chrome only and
 they will not interfere with use of the kiosk as Chrome is the only program
 in use.
 
+Left clicking in the top right corner of Chrome has been disabled to prevent
+minimizing or closing the window and accessing extensions, favorites, and settings.
+Dragging the window by the title bar to resize the window has been disabled
+along with double clicking the title bar to minimize the window.
+
+A print button will also overlay the settings menu button to prevent access
+and to provide an easily accessible method of printing.
+
 
 ## Script Usage
 
 The script only need be executed and it will do the rest.
 
-### Disable blocking
+### Disable script
 
-If you need to disable the keyboard shortcut blocking, use the keyboard
+If you need to disable the script's blocking features, use the keyboard
 shortcut Win + Space. This will display as message box stating, "Enter Konami
 Code!!!" At this point enter the key combination: Up, Up, Down, Down, Left,
 Right, Left, Right, B, A, Enter (aka Konami code.) This will suspend all
-hotkeys, thereby disabling the blocking of keyboard shortcuts. Blocking of
-shortcuts can be restored by using the shortcut Win + P.
+hotkeys, thereby disabling blocking. Blocking can be restored by using the
+shortcut Win + R to reload the script.
 
 ### Logging the user off
 
