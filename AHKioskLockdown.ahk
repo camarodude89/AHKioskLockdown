@@ -8,12 +8,12 @@ CreatePrinterButton() {
     WinGet, isMax, MinMax, Google Chrome
     
     ;calculate the location of the top left corner of print button
-    xCoordOfButton := (x + w) - 34
-    yCoordOfButton := y + 45
+    topLeftX := (x + w) - 34
+    topLeftY := y + 45
 
     if (isMax = 1) {
-        xCoordOfButton -= 10
-        yCoordOfButton += 2
+        topLeftX -= 10
+        topLeftY += 2
     }
 
     Gui, Color, FFFFFF ;Random RGB color, doesn't matter what it is
@@ -21,9 +21,13 @@ CreatePrinterButton() {
     Gui, Add, Picture, gPrint x0 y0, gnome_dev_printer.png
     Gui, +LastFound +AlwaysOnTop -Border -SysMenu -Caption +ToolWindow
     WinSet, TransColor, FFFFFF
-    Gui, Show, x%xCoordOfButton% y%yCoordOfButton%
+    Gui, Show, x%topLeftX% y%topLeftY%, Printer Button
 
-    Return
+    bottomRightX := topLeftX + 32
+    bottomRightY := topLeftY + 32
+
+    dataDict := {"Top Left X":topLeftX, "Top Left Y":topLeftY, "Bottom Right X":bottomRightX, "Bottom Right Y":bottomRightY}
+    Return dataDict
 }
 
 Print() {
@@ -64,8 +68,29 @@ CreateWindow() {
     Return
 }
 
-CalcOffLimitsZone() {
+CalculateOffLimitsZone() {
+    WinGetPos, x, y, w, h, Google Chrome
+    WinGet, isMax, MinMax, Google Chrome
 
+    topLeftX := (x + w) - 320
+    topLeftY := y
+    width := 320
+    height := 100
+
+    if (isMax = 1) {
+        topLeftX += 8
+        topLeftY += 8
+        height += 2
+    }
+    else {
+        height += 4
+    }
+
+    bottomRightX := topLeftX + width
+    bottomRightY := topLeftY + height
+
+    dataDict := {"Top Left X":topLeftX, "Top Left Y":topLeftY, "Bottom Right X":bottomRightX, "Bottom Right Y":bottomRightY}
+    Return dataDict
 }
 
 ;Hides the taskbar completely
@@ -74,8 +99,8 @@ WinHide, ahk_class Shell_TrayWnd
 ;Creates initial printer button
 WinWaitActive, Google Chrome
 Sleep 500
-CreateWindow()
-CreatePrinterButton()
+pBtnDataDict := CreatePrinterButton()
+offDataDict := CalculateOffLimitsZone()
 
 ;Disables dragging the Chrome window by the Title Bar
 WinSet, Style, -0x40000, Chrome
@@ -88,14 +113,17 @@ WinSet, Style, -0x40000, Chrome
 #IfWinActive, Chrome
 CoordMode, Mouse, Relative
 $*LButton::
-ocmx := cmx
-ocmy := cmy
-MouseGetPos, cmx, cmy
-If (cmx >= 1640) && (cmx <= 1926) && (cmy >= 8) && (cmy <= 96)
-Return
-If (ocmy != cmy) || (ocmx != cmx) || (A_TimeSincePriorHotkey > 500) || (A_TimeSincePriorHotkey > DllCall("GetDoubleClickTime"))
-Click Down
-Return
+    ocmx := cmx
+    ocmy := cmy
+    MouseGetPos, cmx, cmy
+    if (cmx >= pBtnDataDict["Top Left X"]) && (cmx <= pBtnDataDict["Bottom Right X"]) && (cmy >= pBtnDataDict["Top Left Y"]) && (cmy <= pBtnDataDict["Bottom Right Y"])
+        Click Down
+    else if (cmx >= offDataDict["Top Left X"]) && (cmx <= offDataDict["Bottom Right X"]) && (cmy >= offDataDict["Top Left Y"]) && (cmy <= offDataDict["Bottom Right Y"])
+        Return
+    if (ocmy != cmy) || (ocmx != cmx) || (A_TimeSincePriorHotkey > 500) || (A_TimeSincePriorHotkey > DllCall("GetDoubleClickTime"))
+        Click Down
+    winTitle = ""
+    Return
 
 $*LButton Up::Click Up
 
@@ -210,10 +238,14 @@ F1::Return
 ^u::Return
 
 ;Reinitiates hotkey suspension
-#p::
+#r::
 Suspend, Off
-WinHide, ahk_class Shell_TrayWnd
-WinSet, Style, -0x40000, Chrome
+Reload
+;WinHide, ahk_class Shell_TrayWnd
+;WinSet, Style, -0x40000, Chrome
+;WinWaitActive, Google Chrome
+;Sleep 500
+;CreatePrinterButton()
 Return
 
 ;log out the user
@@ -252,5 +284,6 @@ myActionLabel:
 Suspend, On
 WinShow, ahk_class Shell_TrayWnd
 WinSet, Style, +0x40000, Chrome
+Gui, Destroy
 Return
 }
