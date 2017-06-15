@@ -18,7 +18,7 @@ CreatePrinterButton() {
 
     Gui, Color, FFFFFF ;Random RGB color, doesn't matter what it is
     Gui, Margin, 0, 0
-    Gui, Add, Picture, gPrint x0 y0, \\mem-app\kiosk\printerIcon.png
+    Gui, Add, Picture, x0 y0, \\mem-app\kiosk\printerIcon.png
     Gui, +LastFound +AlwaysOnTop -Border -SysMenu -Caption +ToolWindow
     WinSet, TransColor, FFFFFF
     Gui, Show, x%topLeftX% y%topLeftY%, Printer Button
@@ -33,11 +33,16 @@ CreatePrinterButton() {
 Print() {
     Print:
     ; Gets the control ID of google chrome
-    ControlGet, controlID, Hwnd,,Chrome_RenderWidgetHostHWND1, Google Chrome
+    ;ControlGet, controlID, Hwnd,,Chrome_RenderWidgetHostHWND1, Google Chrome
     ; Focuses on chrome without breaking focus on what you're doing
-    ControlFocus,,ahk_id %controlID%
-    ControlSend, ahk_parent, ^p, Google Chrome
-    controlID := 0
+    ;ControlFocus,,ahk_id %controlID%
+    ;ControlSend, ahk_parent, ^l, Google Chrome
+    ;controlID := 0
+    MouseClick, left, 1000, 15
+    Sleep 100
+    SendInput ^p
+    Sleep 100
+    MouseClick, left, 200, 100
     Return
 }
 
@@ -93,7 +98,7 @@ $*LButton::
     ocmy := cmy
     MouseGetPos, cmx, cmy
     if (cmx >= pBtnDataDict["Top Left X"]) && (cmx <= pBtnDataDict["Bottom Right X"]) && (cmy >= pBtnDataDict["Top Left Y"]) && (cmy <= pBtnDataDict["Bottom Right Y"])
-        Click Down
+        Print()
     else if (cmx >= offDataDict["Top Left X"]) && (cmx <= offDataDict["Bottom Right X"]) && (cmy >= offDataDict["Top Left Y"]) && (cmy <= offDataDict["Bottom Right Y"])
         Return
     if (ocmy != cmy) || (ocmx != cmx) || (A_TimeSincePriorHotkey > 500) || (A_TimeSincePriorHotkey > DllCall("GetDoubleClickTime"))
@@ -104,6 +109,10 @@ $*LButton::
 $*LButton Up::Click Up
 
 #IfWinActive
+
+^1::
+    Print()
+    Return
 
 ;Disables opening the start menu
 ~LWin Up::
@@ -231,6 +240,9 @@ Return
 Suspend, permit
 If (A_IsSuspended) {
 run, shutdown /l /f
+}
+Else {
+    SendInput, ^l
 }
 Return
 
