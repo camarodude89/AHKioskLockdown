@@ -111,10 +111,6 @@ $*LButton Up::Click Up
 
 #IfWinActive
 
-^1::
-    Print()
-    Return
-
 ;Disables opening the start menu
 ~LWin Up::
 ~RWin Up::
