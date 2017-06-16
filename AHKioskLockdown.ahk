@@ -31,18 +31,12 @@ CreatePrinterButton() {
 }
 
 Print() {
-    Print:
-    ; Gets the control ID of google chrome
-    ;ControlGet, controlID, Hwnd,,Chrome_RenderWidgetHostHWND1, Google Chrome
-    ; Focuses on chrome without breaking focus on what you're doing
-    ;ControlFocus,,ahk_id %controlID%
-    ;ControlSend, ahk_parent, ^l, Google Chrome
-    ;controlID := 0
     MouseClick, left, 1000, 15
     Sleep 100
     SendInput ^p
     Sleep 100
-    MouseClick, left, 200, 100
+    WinWait, Print, Select Printer
+    ControlSend, Button13, {Space}, Print, SelectPrinter
     Return
 }
 
