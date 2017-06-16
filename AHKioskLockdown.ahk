@@ -31,12 +31,19 @@ CreatePrinterButton() {
 }
 
 Print() {
+    ;Forces the Chrome window to be active by clicking the title bar
     MouseClick, left, 1000, 15
     Sleep 100
     SendInput ^p
     Sleep 100
+    ;Selects the print button in the print dialog box
     WinWait, Print, Select Printer
-    ControlSend, Button13, {Space}, Print, SelectPrinter
+    Sleep 500
+    Loop, 3
+    {
+        Send, +{Tab}
+    }
+    Send, {Space}
     Return
 }
 
